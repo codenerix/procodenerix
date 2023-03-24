@@ -1,0 +1,30 @@
+name: Makefile CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.9", "3.10", "3.11"]
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Prepare system
+      run: make prepare
+
+    - name: Create environment
+      run: make venv
+
+    - name: Prepare environment
+      run: make requirements
+
+    - name: Test system
+      run: make test
