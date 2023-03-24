@@ -1,0 +1,23 @@
+1.- Python file based on model is a good choice because it forces the user to architect the software in a tree structure easying the link between models since python will check those.
+
+2.- We have to be aware that some models may require recursive linking  (models linked with themselves):
+
+class ModelA:
+    name = String
+    field = Foreign("ModelA")
+
+3.- We have to be aware that some models may require cross-linking (models linked with another and another linked with us simultaneously):
+
+class ModelA:
+    name = String
+    field = Foreign("ModelB")
+
+class ModelB:
+    name = String
+    field = Foreign("ModelA")
+
+4.- We must consider all the structure about user profiles we already had in Codenerix-Legacy (roles - GenRole)
+
+5.- What about sublists, they should be defined somewhere but it is kind of a VIEW from an existing model. We may should think about ModelView as a new class. A "virtual" model that behaves like an exsiting model but with specific behabiour
+
+6.- We must manage the way forms work, form_validation for example.
